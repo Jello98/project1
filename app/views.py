@@ -7,6 +7,10 @@ This file creates your application.
 
 from app import app
 from flask import render_template, request, redirect, url_for
+from app.forms import PropertyForm
+from app.models import Properties
+import os
+from werkzeug.utils import secure_filename
 
 
 ###
@@ -23,6 +27,60 @@ def home():
 def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
+
+
+
+@app.route('/property',  methods = ['GET','POST'])
+def property():
+
+    form = Propertyform()
+
+    if (request.method == 'POST'):
+        if form.validate_on_submit() == False:
+
+            return render_template('newproperty.html', form = form)
+        else:
+            title = request.form["title"]
+            propertyDescription = request.form["propertyDescription"]
+            Bedrooms = request.form["Bedrooms"]
+            Bathrooms = request.form["Bathrooms"]
+            price = request.form["price"]
+            propertytype = request.form["propertytype"]
+            location = request.form["location"]
+            photo = form.photo.data
+            filename = secure_filename(photo.filename)
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+
+            property = Property(title,propertyDescription, Bedrooms, Bathrooms, price, propertytype, location, secureImageString)
+
+            db.session.add(Property)
+            db.session.commit()
+
+
+            flash('Property added')
+            return redirect(url_for('newProperty'))
+    else:
+
+        flash_errors(form)
+
+    return render_template('newproperty.html', form=form)
+    
+
+
+
+
+
+@app.route('/properties',  methods = ['GET','POST'])
+def properties():
+
+    return render_template('properties.html')
+
+@app.route('/property/<propertyid>',  methods = ['GET','POST'])
+def oneproperty(propertyid):
+    propertyid = Property.query.filter_by(id=propertyid).first()
+
+    return render_template('property.html', property=propertyid)
 
 
 ###
