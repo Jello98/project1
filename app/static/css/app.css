@@ -8,6 +8,15 @@ footer .container{
 }
 
 
+form{
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(9,auto);
+    background-color: white;
+
+}
 
 
 h1{
@@ -19,17 +28,9 @@ h1{
 	margin-top: 10px;
 }
 
-
-form{
-	grid-row-start: 2;
-    grid-row-end: 3;
-	display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(9,auto);
-    background-color: white;
-
+.bg-primary {
+    background-color: #14B7A6 !important;
 }
-
 
 .form-check1{
     grid-column-start:1;
@@ -40,21 +41,12 @@ form{
 
 }
 
-#propertytitle{
-	width: 650px;
-}
-
 .form-check2{
-	grid-column-start:1;
+    grid-column-start:1;
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 3;
     padding: 15px 0px 0px 34px;
-}
-
-#description{
-	width: 650px;
-	height:100px;
 }
 
 .form-check3{
@@ -65,11 +57,6 @@ form{
     padding: 15px 0px 0px 34px;
 }
 
-#noofrooms{
-
-    width:308px;
-}
-
 .form-check4{
     grid-column-start:2;
     grid-column-end: 4;
@@ -78,22 +65,12 @@ form{
     padding: 15px 0px 0px 34px;
 }
 
-#noofbathrooms{
-    width:308px;
-}
-
-
 .form-check5{
     grid-column-start:1;
     grid-column-end: 2;
     grid-row-start: 4;
     grid-row-end: 5;
     padding: 15px 0px 0px 34px;
-}
-
-#price{
-
-    width:308px;
 }
 
 .form-check6{
@@ -104,20 +81,12 @@ form{
     padding: 15px 0px 0px 34px;
 }
 
-#propertytype{
-    width:308px;
-}
-
 .form-check7{
     grid-column-start:1;
     grid-column-end: 2;
     grid-row-start: 5;
     grid-row-end: 6;
     padding: 15px 0px 0px 34px;
-}
-
-#location{
-	width:308px;
 }
 
 .form-check8{
@@ -127,6 +96,30 @@ form{
     grid-row-end: 7;
     padding: 15px 0px 0px 34px;
 }
+
+#propertytitle{
+	width: 650px;
+}
+
+
+
+#description{
+	width: 650px;
+	height:100px;
+}
+
+
+
+#noofrooms,#noofbathrooms, #price,#propertytype,#location{
+
+    width:308px;
+}
+
+.email-btn {
+    background-color: #14B7A6;
+    color: white;
+}
+
 
 .f-group{
     grid-column-start:1;
@@ -169,14 +162,6 @@ form{
 
 
 
-
-
-
-
-
-
-
-
 .btn  {
     background-color:#0073e6;
     width: 140px;
@@ -186,9 +171,23 @@ form{
     border: none;
 }
 
-
+.add-tab {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
 
 
 .form-div {
     margin-bottom: 15px;
+
+
+    width: 350px;
+    height: 45px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #14B7A6;
+    color: white;
 }
