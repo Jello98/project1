@@ -39,20 +39,19 @@ def add_property():
 
             title = request.form["title"]
             propertyDescription = request.form["propertyDescription"]
-            Bedrooms = request.form["Bedrooms"]
-            Bathrooms = request.form["Bathrooms"]
+            Bedrooms = request.form["bedrooms"]
+            Bathrooms = request.form["bathrooms"]
             price = request.form["price"]
             propertytype = request.form["propertytype"]
             location = request.form["location"]
 
-            photo = form.photo.data
-            filename = secure_filename(form.photo.data)
-            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            filename = uploadPhoto(form.photo.data)
+            
 
 
-            prop = Properties(title,propertyDescription, Bedrooms, Bathrooms, price, propertytype, location, secureImageString)
+            prop = Properties(title,propertyDescription, Bedrooms, Bathrooms, price, propertytype, location, filename)
 
-            db.session.add(Property)
+            db.session.add(prop)
             db.session.commit()
 
             flash('Property added')
@@ -61,6 +60,10 @@ def add_property():
         return redirect(url_for("properties"))
     return render_template("add_property.html", form=form )
     
+def uploadPhoto(photo):
+    filename = secure_filename(photo.filename)
+    photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    return filename
 
 
 
@@ -78,7 +81,7 @@ def properties():
 
 @app.route('/property/<propertyid>')
 def property(propertyid):
-    propert = db.session.query(Properties).filter_by(id=propertyid).first()
+    propertone = db.session.query(Properties).filter_by(id=propertyid).first()
 
     return render_template('display_property.html', propert=propert)
 

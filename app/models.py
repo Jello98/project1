@@ -6,7 +6,7 @@ from . import db
 class Properties (db.Model):
 
     __tablename__ = 'properties'
-    pid = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(150))
     propertyDescription = db.Column(db.String(300))
     Bedrooms = db.Column(db.Integer)
@@ -36,3 +36,12 @@ class Properties (db.Model):
 
     def __repr__(self):
         return '<Property %r>' % self.title
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False

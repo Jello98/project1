@@ -264,3 +264,32 @@ form{
     font-size: 11px;
     margin: 20px 10px 0 0;
     border: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.btn  {
+    background-color:#0073e6;
+    width: 140px;
+    height: 42px;
+    margin-top: 10px;
+    font-size: 17px;
+    border: none;
+}
+
+
+
+
+.form-div {
+    margin-bottom: 15px;
+}
