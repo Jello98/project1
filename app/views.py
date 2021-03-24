@@ -73,7 +73,10 @@ def properties():
     return render_template("display_properties.html", properties=propert)
 
 
-
+@app.route('/get_image/<filename>')
+def get_image(filename):
+    root_dir = os.getcwd()
+    return send_from_directory(os.path.join(root_dir, app.config['UPLOAD_FOLDER']), filename)
 
 
 
