@@ -1,56 +1,45 @@
 {% extends "base.html" %}
 
-{% block css %}
-<link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
-{% endblock %}
-
 {% block main %}
-<div class="jumbotron">
-  <div class="container">
-    <h2><b>Add New Property</b></h2>
-    <hr>
+<div class="form-container">
+    <h1>Add New Property </h1>
+    <form action="{{ url_for('add_property') }}" method="POST" enctype="multipart/form-data">
+        {{ form.csrf_token }}
 
-    <form action="{{ url_for('add_Property') }}" method="POST" enctype="multipart/form-data">
-       {{ form.csrf_token }}
-      <div class="formelement">
-            <h6>{{ form.title.label }}  <p class="required"> (Required)</p> </h6>
-            {{ form.title }}
-        </div><br>
-        <div class="formelement">
-          <h6>{{ form.propertyDesc.label}}<p class="required">(Required)</p></h6>
-          {{ form.propertyDesc}}
-         </div>
-        <div class="formelement">
-            <h6>{{ form.NoOfBedrooms.label}}<p class="required"> (Required)</p></h6>
-            {{ form.NoOfBedrooms}}
-        </div><br>
-        <div class="formelement">
-            <h6>{{ form.NoOfBathrooms.label}}<p class="required"> (Required)</p></h6>
-            {{ form.NoOfBathrooms}}
-        </div><br>
-        <div class="formelement">
-          <h6>{{ form.price.label}}<p class="required">(Required)</p></h6>
-          {{ form.price}}
-      </div>
-      <div class="formelement">
-        <h6>{{ form.propertyType.label}}<p class="required">(Required)</p></h6>
-        {{ form.propertyType}}
-       </div>
-        <div class="formelement">
-            <h6>{{ form.location.label}}<p class="required">(Required)</p></h6>
-            {{ form.location}}
+        <div class="form-group">
+            {{ form.title.label ('Title') }} {{ form.title(class="form-control") }}
+
         </div>
 
-       <div class="formelement">
-        <h6>{{ form.photo.label}}<p class="required">(Required)</p></h6>
-        {{ form.photo}}
-       </div>      
-        <button type="submit" class="add_PropertyBtn">Add Property</button>
-    </form>
-  </div>
-</div>
-{% endblock %}
+        <div class="form-group">
+            {{ form.propertyDescription.label('Property Description') }} {{ form.propertyDescription(class="form-control") }}
+        </div>
 
-{% block js %}
-<script src="{{ url_for('static', filename='js/app.min.js') }}" charset="utf-8"></script>
+        <div class="form-group">
+                {{ form.bedrooms.label ('Number of bedrooms') }} {{ form.bedrooms(class="form-control", placeholder='3') }}
+            </div>
+            <div class="form-group">
+                {{ form.bathrooms.label ('Number of bathrooms') }} {{ form.bathrooms(class="form-control", placeholder='2')}}    
+            </div>
+
+            <div class="form-group">
+                {{ form.price.label ('Price') }} {{ form.price(class="form-control", placeholder='15,000,000') }}    
+            </div>
+            <div class="form-group">
+                {{ form.propertytype.label ('Type of Property')}} {{ form.propertytype(class="form-control")}}    
+            </div>
+
+        <div class="form-group">
+            {{ form.location.label ('Location') }} {{ form.location(class="form-control", placeholder='10 Waterloo Rd' ) }}    
+        </div>
+        <div class="form-group">
+            {{ form.photo.label ('Image of Property') }} {{ form.photo(class="form-control") }}    
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary">Add Property</button>
+
+    </form>  
+
+</div>
+
+
 {% endblock %}

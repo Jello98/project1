@@ -6,11 +6,10 @@ from flask_wtf.file import FileField, FileRequired, FileAllowed
 from app import app
 
 
-WTF_CSRF_SECRET_KEY='TET342525WL=2]42P[21K,10``L2@#@@$1~2`3]'
-
 class PropertyForm(FlaskForm):
 
-    title = TextField('title', validators=[DataRequired()])
+    title = TextField('Title', validators=[DataRequired()])
+    
     propertyDescription = TextAreaField('Property Description', validators=[DataRequired()])
 
     bedrooms = TextField('Number of Bedrooms', validators=[DataRequired()])
@@ -19,6 +18,6 @@ class PropertyForm(FlaskForm):
     propertytype= SelectField('Type of Property',choices=[('Apartments', 'Apartments'),('House','House')], validators= [DataRequired()])
 
     location = TextField('Location', validators=[DataRequired()])
-    photo= FileField('Image of Property', validators=[DataRequired()])
+    photo= FileField('Image of Property', validators=[FileRequired(), FileAllowed(['jpg','png','jpeg'],'Only images allowed')])
 
     submit = SubmitField("Send")

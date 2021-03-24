@@ -4,12 +4,11 @@ Jinja2 Documentation:    http://jinja.pocoo.org/2/documentation/
 Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
-
-from app import app
+import os
+from app import app,db
 from flask import render_template, request, redirect, url_for
 from app.forms import PropertyForm
 from app.models import Properties
-import os
 from werkzeug.utils import secure_filename
 
 
@@ -26,20 +25,18 @@ def home():
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name="Jelani Hanlan")
 
 
 
 @app.route('/property',  methods = ['GET','POST'])
-def property():
+def add_property():
 
-    form = Propertyform()
+    form = PropertyForm()
 
     if (request.method == 'POST'):
-        if form.validate_on_submit() == False:
+        if form.validate_on_submit() == True:
 
-            return render_template('newproperty.html', form = form)
-        else:
             title = request.form["title"]
             propertyDescription = request.form["propertyDescription"]
             Bedrooms = request.form["Bedrooms"]
@@ -47,24 +44,22 @@ def property():
             price = request.form["price"]
             propertytype = request.form["propertytype"]
             location = request.form["location"]
+
             photo = form.photo.data
-            filename = secure_filename(photo.filename)
+            filename = secure_filename(form.photo.data)
             photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
 
-            property = Property(title,propertyDescription, Bedrooms, Bathrooms, price, propertytype, location, secureImageString)
+            prop = Properties(title,propertyDescription, Bedrooms, Bathrooms, price, propertytype, location, secureImageString)
 
             db.session.add(Property)
             db.session.commit()
 
-
             flash('Property added')
-            return redirect(url_for('newProperty'))
-    else:
-
-        flash_errors(form)
-
-    return render_template('newproperty.html', form=form)
+        else:
+            flash('Property not Added')
+        return redirect(url_for("properties"))
+    return render_template("add_property.html", form=form )
     
 
 
@@ -73,14 +68,19 @@ def property():
 
 @app.route('/properties',  methods = ['GET','POST'])
 def properties():
+    propert=db.session.query(Properties).all()
+    return render_template("display_properties.html", properties=propert)
 
-    return render_template('properties.html')
 
-@app.route('/property/<propertyid>',  methods = ['GET','POST'])
-def oneproperty(propertyid):
-    propertyid = Property.query.filter_by(id=propertyid).first()
 
-    return render_template('property.html', property=propertyid)
+
+
+
+@app.route('/property/<propertyid>')
+def property(propertyid):
+    propert = db.session.query(Properties).filter_by(id=propertyid).first()
+
+    return render_template('display_property.html', propert=propert)
 
 
 ###

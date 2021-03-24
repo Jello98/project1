@@ -12,4 +12,4 @@ Flask-Script
 Flask-Login
 Flask-Mail
 Flask-WTF
-
+psycopg2-binary
