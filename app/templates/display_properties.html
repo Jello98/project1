@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
 {% block main %}
-<h1> Properties </h1>
+
+<h1>Properties </h1>
     {% for property in properties %}
             <div class="cards" >
                 <div class="card" style="width: 20rem; height: 30rem;">
 
-                    <img src="{{ url_for('get_image',filename="uploads/"+property.photo)}}" class="card-img-top"  />
+                    <img src="{{ url_for('static',filename="uploads/"+property.photo)}}" class="card-img-top"  />
 
                     <div class="card-body">
 
@@ -16,7 +17,7 @@
                         <p class="card-text" id="price">{{property.price}} </p>
                     </div>
                     <div class="pannel-footer" >
-                    <button type="button" class="f-group" id="buttn" name="view" onclick="window.location.href='{{ url_for( 'propertyId' , userid=user.id ) }}';">View Property</button>
+                    <button type="button" class="f-group" id="buttn" name="view" onclick="window.location.href='{{ url_for( 'property' , propertyid=property.id ) }}';">View Property</button>
 
                     </div>
                     

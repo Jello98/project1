@@ -6,21 +6,21 @@
     <div class="card mb-3 borderCol" style="max-width: 1500px;">
       <div class="row no-gutters">
         <div class="col-md-4">
-          <img src="{{ url_for('static', filename="uploads/"+user.photo) }}" class="card-img" alt="...">
+          <img src="{{ url_for('static', filename="uploads/"+properties.photo) }}" class="card-img" alt="...">
         </div>
         <div class="col-md-8">
             <div class="card-body">
-                <p class="card-text" id ="heading"> {{user.propertytitle}} </p>
+                <p class="card-text" id ="heading"> {{properties.propertytitle}} </p>
                 <div class="element-wrap">
-                <p class="card-text" id ="dtype"></i> {{user.price}} </p>
-                <p class="card-text" id="ptype"></i> {{user.propertytype}} </p>
+                <p class="card-text" id ="dtype"></i> {{properties.price}} </p>
+                <p class="card-text" id="ptype"></i> {{properties.propertytype}} </p>
                </div>
-                <p class="card-text" id="udescrip"></i> {{user.description}} </p>
+                <p class="card-text" id="udescrip"></i> {{properties.description}} </p>
                 <div class="element-wrap2">
-                <p class="card-text description"><i class="fa fa-bed"></i> {{user.noofrooms}} Bedrooms</p>
-                <p class="card-text description"><i class="fa fa-bath"></i> {{user.noofbathrooms}} Bathrooms</p>
+                <p class="card-text description"><i class="fa fa-bed"></i> {{properties.noofrooms}} Bedrooms</p>
+                <p class="card-text description"><i class="fa fa-bath"></i> {{properties.noofbathrooms}} Bathrooms</p>
                </div>
-                <p class="card-text" id ="locay"><i class="fa fa-map-marker" ></i> {{user.location}} </p>
+                <p class="card-text" id ="locay"><i class="fa fa-map-marker" ></i> {{properties.location}} </p>
                 <button class="btn btn-primary" name="email">Email Realtor</button>
             </div>
         </div>

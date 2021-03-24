@@ -6,7 +6,7 @@ This file creates your application.
 """
 import os
 from app import app,db
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for,flash
 from app.forms import PropertyForm
 from app.models import Properties
 from werkzeug.utils import secure_filename
@@ -44,10 +44,8 @@ def add_property():
             price = request.form["price"]
             propertytype = request.form["propertytype"]
             location = request.form["location"]
-
             filename = uploadPhoto(form.photo.data)
             
-
 
             prop = Properties(title,propertyDescription, Bedrooms, Bathrooms, price, propertytype, location, filename)
 
@@ -83,7 +81,7 @@ def properties():
 def property(propertyid):
     propertone = db.session.query(Properties).filter_by(id=propertyid).first()
 
-    return render_template('display_property.html', propert=propert)
+    return render_template('display_property.html', properties=propertone)
 
 
 ###
